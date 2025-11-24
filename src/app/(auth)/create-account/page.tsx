@@ -1,5 +1,5 @@
 "use client";
-
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -31,6 +31,10 @@ type CreateAccountForm = {
 };
 
 export default function Page() {
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const [success, setSuccess] = useState<string | null>(null);
+
   const form = useForm<CreateAccountForm>({
     defaultValues: {
       name: "",
@@ -44,25 +48,44 @@ export default function Page() {
   });
 
   const onSubmit = async (data: CreateAccountForm) => {
-    console.log("create-account data", data);
+    setLoading(true);
+    setError(null);
+    setSuccess(null);
+
+    try {
+      const response = await fetch("/api/register", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      });
+
+      const result = await response.json();
+
+      if (!response.ok) {
+        setError(result.error || "Something went wrong");
+      } else {
+        setSuccess("Account created successfully!");
+        form.reset(); 
+      }
+    } catch (err) {
+      console.error(err);
+      setError("Failed to create account");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
-    <div className="flex min-h-svh w-full items-center justify-center p-6 md:p-10">
+    <div className="flex min-h-screen w-full items-center justify-center p-6 md:p-10">
       <div className="w-full max-w-md">
         <Card>
           <CardHeader>
             <CardTitle>Create an account</CardTitle>
-            <CardDescription>
-              Register a new user for the system
-            </CardDescription>
+            <CardDescription>Register a new user for the system</CardDescription>
           </CardHeader>
           <CardContent>
             <Form {...form}>
-              <form
-                onSubmit={form.handleSubmit(onSubmit)}
-                className="space-y-4"
-              >
+              <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
                 <FormField
                   control={form.control}
                   name="name"
@@ -98,11 +121,7 @@ export default function Page() {
                     <FormItem>
                       <FormLabel>Phone</FormLabel>
                       <FormControl>
-                        <Input
-                          type="tel"
-                          placeholder="Phone number"
-                          {...field}
-                        />
+                        <Input type="tel" placeholder="Phone number" {...field} />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -116,18 +135,12 @@ export default function Page() {
                     <FormItem>
                       <FormLabel>Password</FormLabel>
                       <FormControl>
-                        <Input
-                          type="password"
-                          placeholder="Password"
-                          {...field}
-                        />
+                        <Input type="password" placeholder="Password" {...field} />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
                   )}
                 />
-
-                {/* Address removed per request */}
 
                 <div className="grid grid-cols-2 gap-3">
                   <FormField
@@ -180,10 +193,11 @@ export default function Page() {
                   )}
                 />
 
-                {/* Salary and Contract Expire removed per request */}
+                {error && <p className="text-red-600">{error}</p>}
+                {success && <p className="text-green-600">{success}</p>}
 
-                <Button type="submit" className="w-full">
-                  Create account
+                <Button type="submit" className="w-full" disabled={loading}>
+                  {loading ? "Creating..." : "Create account"}
                 </Button>
               </form>
             </Form>
