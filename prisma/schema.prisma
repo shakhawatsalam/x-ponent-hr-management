@@ -5,18 +5,18 @@
 // Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
 
 generator client {
-  provider = "prisma-client-js"
-  output   = "../src/generated/prisma/client"
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
 }
 
 datasource db {
   provider = "postgresql"
 }
 
-
 enum Role {
   hr
   manager
+  employee
 }
 
 model User {
@@ -54,7 +54,7 @@ model Performance {
   title             String
   assignAt          DateTime
   completedAt       DateTime?
-  performanceRating Int
+  performanceRating Int?
   employeeId        String
   employee          User @relation(fields: [employeeId], references: [id])
 }

@@ -9,13 +9,13 @@ CREATE TABLE "User" (
     "phone" TEXT NOT NULL,
     "password" TEXT NOT NULL,
     "authToken" TEXT NOT NULL,
-    "address" TEXT,
+    "address" TEXT NOT NULL,
     "designation" TEXT NOT NULL,
     "department" TEXT NOT NULL,
     "role" "Role" NOT NULL,
-    "joiningDate" TIMESTAMP(3),
-    "salary" INTEGER,
-    "contractExpire" TIMESTAMP(3),
+    "joiningDate" TIMESTAMP(3) NOT NULL,
+    "salary" INTEGER NOT NULL,
+    "contractExpire" TIMESTAMP(3) NOT NULL,
 
     CONSTRAINT "User_pkey" PRIMARY KEY ("id")
 );
