@@ -27,7 +27,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const [userRole, setUserRole] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<any>(null);
- 
+
   // Fetch current user
   const fetchUser = async () => {
     try {
@@ -42,9 +42,9 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
       }
 
       const data = await response.json();
-
-      setUser(data.user);
-      setUserRole(data.user?.role || null);
+      console.dir(data.user);
+      setUser(data?.user);
+      setUserRole(data?.user?.role);
     } catch (err) {
       setError(err);
     } finally {

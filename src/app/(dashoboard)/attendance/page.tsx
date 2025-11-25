@@ -20,6 +20,7 @@ export default function AttendancePage() {
     attendances,
     employees,
     loading,
+    refetch,
     toast,
     showToast,
     fetchAttendances,
@@ -130,7 +131,9 @@ export default function AttendancePage() {
       </div>
     );
   }
-
+  if (userRole == null) {
+    refetch();
+  }
   const isHR = userRole === "hr";
 
   return (

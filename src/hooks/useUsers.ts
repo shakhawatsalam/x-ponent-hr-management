@@ -6,7 +6,6 @@ import { useAuthContext } from "@/app/context/auth-provider";
 import { ToastState, User } from "@/types/types";
 import { useState, useEffect, useCallback } from "react";
 
-
 export const useUsers = () => {
   const [users, setUsers] = useState<User[]>([]);
   const [loading, setLoading] = useState(true);
@@ -16,7 +15,7 @@ export const useUsers = () => {
     type: "success",
   });
 
-  const { userRole } = useAuthContext();
+  const { userRole, refetch } = useAuthContext();
 
   // Toast management
   useEffect(() => {
@@ -52,7 +51,6 @@ export const useUsers = () => {
     }
   }, [showToast]);
 
-  
   const createUser = async (data: any): Promise<boolean> => {
     try {
       const response = await fetch("/api/users", {
@@ -129,6 +127,7 @@ export const useUsers = () => {
     loading,
     toast,
     userRole,
+    refetch,
     fetchUsers,
     createUser,
     updateUser,

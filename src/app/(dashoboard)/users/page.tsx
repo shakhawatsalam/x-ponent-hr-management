@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import {  useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Plus, Loader2 } from "lucide-react";
 import { useUsers } from "@/hooks/useUsers";
@@ -14,6 +14,7 @@ export default function UsersPage() {
     users,
     loading,
     toast,
+    refetch,
     userRole,
     createUser,
     updateUser,
@@ -26,6 +27,15 @@ export default function UsersPage() {
   const [selectedUser, setSelectedUser] = useState<User | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
+  // // Add comprehensive debugging
+  // useEffect(() => {
+  //   console.log("Loading state:", loading);
+  //   console.log("User role:", userRole);
+  //   console.log("Users data:", users);
+  // }, [loading, userRole, users]);
+
+  // Wait for both users data AND user role to be loaded
+  const isLoading = loading || userRole === undefined;
   // Handlers
   const handleEdit = (user: User) => {
     setSelectedUser(user);
@@ -78,15 +88,17 @@ export default function UsersPage() {
     setIsSubmitting(false);
   };
 
-  // Loading state
-  if (loading) {
+  // Updated loading state to check both
+  if (isLoading) {
     return (
       <div className='flex items-center justify-center h-screen'>
         <Loader2 className='h-8 w-8 animate-spin' />
       </div>
     );
   }
-
+  if (userRole == null) {
+    refetch();
+  }
   const canManageUsers = userRole === "hr" || userRole === "manager";
 
   return (

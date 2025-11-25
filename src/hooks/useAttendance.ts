@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 "use client";
 
+import { useAuthContext } from "@/app/context/auth-provider";
 import { Attendance, Employee, ToastState } from "@/types/types";
 import { useState, useEffect, useCallback } from "react";
 
@@ -8,7 +9,7 @@ export const useAttendance = () => {
   const [attendances, setAttendances] = useState<Attendance[]>([]);
   const [employees, setEmployees] = useState<Employee[]>([]);
   const [loading, setLoading] = useState(true);
-  const [userRole, setUserRole] = useState<string>("");
+
   const [toast, setToast] = useState<ToastState>({
     show: false,
     message: "",
@@ -32,18 +33,7 @@ export const useAttendance = () => {
     []
   );
 
-  // Data fetching
-  const fetchUserRole = useCallback(async () => {
-    try {
-      const response = await fetch("/api/me");
-      if (response.ok) {
-        const data = await response.json();
-        setUserRole(data.user.role);
-      }
-    } catch (error) {
-      console.error("Error fetching user role:", error);
-    }
-  }, []);
+  const { userRole, refetch } = useAuthContext();
 
   const fetchAttendances = useCallback(async () => {
     try {
@@ -76,19 +66,16 @@ export const useAttendance = () => {
   // Initial data load
   useEffect(() => {
     const loadData = async () => {
-      await Promise.all([
-        fetchUserRole(),
-        fetchAttendances(),
-        fetchEmployees(),
-      ]);
+      await Promise.all([fetchAttendances(), fetchEmployees()]);
     };
     loadData();
-  }, [fetchUserRole, fetchAttendances, fetchEmployees]);
+  }, [fetchAttendances, fetchEmployees]);
 
   return {
     attendances,
     employees,
     loading,
+    refetch,
     userRole,
     toast,
     showToast,
