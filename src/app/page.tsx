@@ -1,3 +1,4 @@
+"use client";
 import { redirect } from "next/navigation";
 import { useAuthContext } from "./context/auth-provider";
 import Loading from "@/components/Loading";

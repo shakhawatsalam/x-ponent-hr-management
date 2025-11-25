@@ -35,8 +35,6 @@ export function proxy(request: NextRequest) {
       const userRole = getRole(request);
       const allowedRoles = protectedRoutes[route];
 
-      console.log("Middleware check:", { path, userRole, allowedRoles });
-
       if (!userRole || !allowedRoles.includes(userRole)) {
         if (userRole === "manager") {
           return NextResponse.redirect(new URL("/attendance", url.origin));
