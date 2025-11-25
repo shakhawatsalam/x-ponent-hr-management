@@ -1,301 +1,178 @@
-**📄 Coding Test — HR Management Application**
+
+# 📄 HR Management Application — Submission README
+
 ==============================================
 
-**Deadline:** 25 November 2025 at 11:59 PM, **Goal:** Evaluate your ability to build a small but functional full-stack application using Next.js, Prisma, React Hook Form, and Zod.
-
-**🎯 Project Overview**
-=======================
-
-You will build a **simple HR Management application** where two user roles exist:
-
-### **1\. HR**
-
-*   Manage User Information (Create, Update, Delete)
-    
-*   Manage Attendance (Create, Update, Delete)
-    
-*   Manage Payroll
-    
-*   View Performance (read-only)
-    
-
-### **2\. Manager**
-
-*   Manage Performance (Assign tasks + update rating)
-    
-*   View User Information (read-only)
-    
-*   View Attendance (read-only)
-    
-*   View payroll (read-only)
-    
-
-**Note:** There is **no need to implement the Employee flow**.
-
-**🧩 Functional Requirements**
-==============================
-
-**1\. Authentication Requirement**
-==================================
-
-You may implement authentication using **either** of the following:
--------------------------------------------------------------------
-
-### **Option A — NextAuth**
-
-*   Use Credentials Provider
-    
-*   Store users in the provided Prisma database
-    
-*   Restrict routes based on role (HR, Manager)
-    
-
-### **Option B — Manual Authentication (JWT)**
-
-*   Implement custom sign-in logic
-    
-*   Issue JWT on login
-    
-*   Protect server actions + pages using middleware
-    
-*   Store password hashes (never plain text)
-    
-
-**You may choose whichever method you are more comfortable with.**
-------------------------------------------------------------------
-
-**2\. User Management (HR only)**
----------------------------------
-
-A simple CRUD form for user records.
-
-### **Required Fields:**
-
-*   name
-    
-*   email
-    
-*   phone
-    
-*   password
-    
-*   authToken
-    
-*   address
-    
-*   designation
-    
-*   department
-    
-*   role: hr | manager | employee
-    
-*   joiningDate
-    
-*   salary
-    
-*   contractExpire
-    
-
-**3\. Performance Module (Manager only)**
------------------------------------------
-
-The manager should be able to:
-
-*   Assign a task to an employee
-    
-*   Update completion date
-    
-*   Update performance rating (1–5)
-    
-
-### **Fields:**
-
-*   employee (relation to User)
-    
-*   title
-    
-*   assignAt
-    
-*   completedAt (optional)
-    
-*   performanceRating (1–5)
-    
-
-**4\. Attendance Module**
--------------------------
-
-### **HR:**
-
-*   Add attendance
-    
-*   Edit attendance
-    
-*   Delete attendance
-    
-
-### **Manager:**
-
-*   View only
-    
-
-### **Fields:**
-
-*   employee
-    
-*   date
-    
-*   checkIn
-    
-*   checkOut
-    
-
-**5\. Payroll Module (HR only)**
---------------------------------
-
-### **Steps to generate payroll:**
-
-1.  Click **Create Payroll**
-    
-2.  A modal opens with:
-    
-    *   Select User (dropdown)
-        
-    *   Select Month (dropdown)
-        
-3.  Calculation (read-only):workingDays = 22
-    
-
-payable = (salary / 22) \* attendanceDays
-
-1.  Confirm → save payroll
-    
-
-### **Required Fields:**
-
-*   payrollFor
-    
-*   payrollMonth
-    
-*   totalAmount
-    
-*   reduceAmount (optional)
-    
-*   createdBy
-    
-
-**⚙️ Technical Requirements**
-=============================
-
-**Mandatory Technologies**
---------------------------
-
-You must use:
-
-*   **Next.js** (App Router)
-    
-*   **shadcn/ui**
-    
-*   **React Hook Form**
-    
-*   **Zod** (schema validation)
-    
-*   **Prisma ORM**
-    
-*   **Database:** your choice (e.g., PostgreSQL/MongoDB)
-    
-
-**🧪 Coding Tasks**
-===================
-
-### **✔ Zod Validation (Required)**
-
-Every form must:
-
-*   Use a Zod schema
-    
-*   Display validation errors
-    
-*   Disable the submit button until the form is valid
-    
-
-### **✔ Proper Button States (Optional)**
-
-*   Disable buttons while submitting
-    
-*   Disable buttons if required fields are empty or invalid
-    
-
-### **✔ Modal Messages (Optional)**
-
-Every modal action (create/update/delete) must show:
-
-*   A success message, or
-    
-*   An error message
-    
-
-**🚀 Setup Instructions**
-=========================
-
-We will provide you with the starter project structure and database schema at:
-
-🔗 https://github.com/mokhles018/HR-Management-Test
-
-Please follow these steps:
-
-### **1\. Clone the repository**: git clone https://github.com/mokhles018/HR-Management-Test
-
-### **2\. Install dependencies**
-
-pnpm install
-
-### **3\. Configure environment**
-
-DATABASE\_URL=’’
-
-more..
-
-### **4\. Run Prisma migrations**
-
-pnpm prisma migrate dev
-
-### **5\. Start the project**
-
-pnpm run dev
-
-**📤 What You Must Submit**
-===========================
-
-1️⃣ **GitHub Repository** Push the full project to a public branch (e.g., submission). Environment variables, credentials, and the live link must be included in the **README.md**.
-
-2️⃣ **Live Deployment** Deploy on Vercel / Netlify / Railway and share the live URL.
-
-3️⃣ **Login Credentials** Provide:
-
-*   **HR Account**
-    
-*   **Manager Account**Example:
-    
-
-HR → hr@example.com / 123456
-
-Manager → manager@example.com / 123456
-
-4️⃣ **Submitted Emails**mokhles.xponent@gmail.comgazinafis.xponent@gmail.com
-
-**Note:** README.md must contain the env file, login credentials, and live deployment link. GitHub link should be shared with the mentioned email addresses.
-
-**📝 Evaluation Criteria**
-==========================
-
-We will evaluate:
-
-*   Correct use of **Next.js App Router**
-    
-*   Clean UI using **shadcn**
-    
-*   Proper **Zod validation**
-    
-*   Button disabled states implemented correctly
-    
-*   Code structure and readability
+## 🚀 Live Deployment
+
+#### 🔗 Live URL:  https://x-ponent-hr-management.vercel.app/
+
+
+## 📦 GitHub Repository
+
+#### 🔗 URL:  https://github.com/shakhawatsalam/x-ponent-hr-management
+## Environment Variables
+
+To run this project, you will need to add the following environment variables to your .env file
+
+`DATABASE_URL=`
+
+`JWT_SECRET=`
+
+
+## 👥 Login Credentials
+
+🔸 HR Account
+
+Email: john@example.com
+
+Password: password1234
+
+🔸 Manager Account
+
+Email: shawon@gmail.com
+
+Password: password1234
+
+
+
+# File Tree: x-ponent-hr-management
+```
+├── prisma
+│   ├── migrations
+│   │   ├── 20251123103458_init
+│   │   │   └── migration.sql
+│   │   ├── 20251124041734
+│   │   │   └── migration.sql
+│   │   ├── 20251125055000_add_employee_role
+│   │   │   └── migration.sql
+│   │   ├── 20251125082248_make_performance_rating_optional
+│   │   │   └── migration.sql
+│   │   └── migration_lock.toml
+│   └── schema.prisma
+├── public
+│   ├── file.svg
+│   ├── globe.svg
+│   ├── next.svg
+│   ├── vercel.svg
+│   └── window.svg
+├── src
+│   ├── app
+│   │   ├── (auth)
+│   │   │   ├── create-account
+│   │   │   │   └── page.tsx
+│   │   │   └── login
+│   │   │       └── page.tsx
+│   │   ├── (common)
+│   │   │   └── unauthorized
+│   │   │       └── page.tsx
+│   │   ├── (dashoboard)
+│   │   │   ├── attendance
+│   │   │   │   └── page.tsx
+│   │   │   ├── payroll
+│   │   │   │   └── page.tsx
+│   │   │   ├── performance
+│   │   │   │   └── page.tsx
+│   │   │   ├── users
+│   │   │   │   └── page.tsx
+│   │   │   └── layout.tsx
+│   │   ├── api
+│   │   │   ├── attendance
+│   │   │   │   ├── [id]
+│   │   │   │   │   └── route.ts
+│   │   │   │   └── route.ts
+│   │   │   ├── employees
+│   │   │   │   └── route.ts
+│   │   │   ├── login
+│   │   │   │   └── route.ts
+│   │   │   ├── logout
+│   │   │   │   └── route.ts
+│   │   │   ├── me
+│   │   │   │   └── route.ts
+│   │   │   ├── payroll
+│   │   │   │   ├── attendance-days
+│   │   │   │   │   └── route.ts
+│   │   │   │   └── route.ts
+│   │   │   ├── performance
+│   │   │   │   ├── [id]
+│   │   │   │   │   └── route.ts
+│   │   │   │   └── route.ts
+│   │   │   ├── register
+│   │   │   │   └── route.ts
+│   │   │   └── users
+│   │   │       ├── [id]
+│   │   │       │   └── route.ts
+│   │   │       └── route.ts
+│   │   ├── context
+│   │   │   └── auth-provider.tsx
+│   │   ├── favicon.ico
+│   │   ├── globals.css
+│   │   ├── layout.tsx
+│   │   ├── not-found.tsx
+│   │   └── page.tsx
+│   ├── components
+│   │   ├── Dialogs
+│   │   │   ├── AttendanceDialogs.tsx
+│   │   │   ├── CreatePayrollDialog.tsx
+│   │   │   ├── PerformanceDialogs.tsx
+│   │   │   └── UserDialogs.tsx
+│   │   ├── Forms
+│   │   │   ├── AttendanceForm.tsx
+│   │   │   ├── PayrollCalculation.tsx
+│   │   │   ├── PayrollForm.tsx
+│   │   │   ├── PerformanceForm.tsx
+│   │   │   └── UserForm.tsx
+│   │   ├── Tables
+│   │   │   ├── AttendanceTable.tsx
+│   │   │   ├── PayrollTable.tsx
+│   │   │   ├── PerformanceTable.tsx
+│   │   │   └── UsersTable.tsx
+│   │   ├── auth
+│   │   │   ├── LoginForm.tsx
+│   │   │   └── RegisterForm.tsx
+│   │   ├── ui
+│   │   │   ├── button.tsx
+│   │   │   ├── card.tsx
+│   │   │   ├── dialog.tsx
+│   │   │   ├── dropdown-menu.tsx
+│   │   │   ├── field.tsx
+│   │   │   ├── form.tsx
+│   │   │   ├── input.tsx
+│   │   │   ├── label.tsx
+│   │   │   ├── select.tsx
+│   │   │   ├── separator.tsx
+│   │   │   ├── sheet.tsx
+│   │   │   ├── sidebar.tsx
+│   │   │   ├── skeleton.tsx
+│   │   │   ├── table.tsx
+│   │   │   └── tooltip.tsx
+│   │   ├── Loading.tsx
+│   │   ├── Toast.tsx
+│   │   ├── app-header.tsx
+│   │   └── app-sidebar.tsx
+│   ├── generated
+│   ├── hooks
+│   │   ├── use-mobile.ts
+│   │   ├── useAttendance.ts
+│   │   ├── usePayroll.ts
+│   │   ├── usePerformance.ts
+│   │   └── useUsers.ts
+│   ├── lib
+│   │   ├── auth.ts
+│   │   ├── prisma.ts
+│   │   └── utils.ts
+│   ├── types
+│   │   └── types.ts
+│   └── proxy.ts
+├── .gitignore
+├── README.md
+├── components.json
+├── eslint.config.mjs
+├── next.config.ts
+├── package.json
+├── pnpm-lock.yaml
+├── postcss.config.mjs
+├── prisma.config.ts
+├── tsconfig.json
+└── vercel.json
+```
